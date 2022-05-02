@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [qr, setQr] = useState();
+  function passQr(e){
+    console.log(e.target.value);
+    let q = e.target.value;
+    console.log('q',q)
+    setQr(`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${q}`)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="Container-app">
+      <div className="Container-all">
+        <div className="Container-in">
+            <input onChange={passQr} placeholder="digite um site"></input>
+
+        </div>
+        <div className="Container-out">
+           <img src={qr}></img>
+        </div>
+      </div>
     </div>
   );
 }
